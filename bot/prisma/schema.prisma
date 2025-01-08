@@ -1,0 +1,60 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DB_URL")
+}
+
+model GuildUser {
+    userId       BigInt
+    guildId      BigInt
+    bio          String   @default("I'm a human!")
+    upvotes      String[] @default([])
+    downvotes    String[] @default([])
+    weekStats    Json[]   @default([]) // { weekTimestamp, messageCount }
+    messageCount Int      @default(0)
+    timeoutCount Int      @default(0)
+    kickCount    Int      @default(0)
+    banCount     Int      @default(0)
+    praiseCount  Int      @default(0)
+
+    leftAt DateTime?
+
+    @@id([userId, guildId])
+}
+
+model ServerSettings {
+    guildId      BigInt
+    embedColor   Int    @default(0)
+    introChannel BigInt @default(0)
+
+    banValue     Int @default(20)
+    kickValue    Int @default(10)
+    timeoutValue Int @default(5)
+
+    // EXPERIMENTS
+    experiments Int[] @default([])
+
+    leftAt DateTime?
+
+    @@id([guildId])
+}
+
+model Developers {
+    userId     BigInt
+    embedColor Int    @default(0)
+
+    @@id([userId])
+}
+
+model Errors {
+    errorId     Int
+    userId      BigInt
+    commandName String
+    description String
+    timestamp   DateTime
+
+    @@id([errorId])
+}

@@ -1,0 +1,16 @@
+{
+  "name": "repp",
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@prisma/client": "6.2.1",
+    "discordeno": "^21.0.0",
+    "prisma": "^6.2.1"
+  }
+}
