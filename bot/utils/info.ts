@@ -10,6 +10,13 @@ export const makeReppHomePage = (): Embed => ({
     footer: { text: `${VERSION}` }
 })
 
+export const makeReppIntroPage = (): Embed => ({
+    title: "REPP is a bot that shows you the good and bad",
+    description: "The aim of REPP is to easily show someone's good or bad influence on your server, it does this by generating your server members a reputation score which is based on multiple factors:\n- Upvotes/Downvotes\n- Message Activity\n- Moderation History.",
+    color: 0xA757F7,
+    footer: { text: "⚠ REPP is in BETA, some features are experimental and can change." }
+})
+
 export const makeReppNewsPage = (): Embed => ({
     title: "REPP is in beta! - v0.3",
     description: ":warning: **New Language**\n> It's in typescript now!",
@@ -30,7 +37,8 @@ export const makeReppCommandPage = (): Embed => ({
 })
 
 export const makeReppBackButtons = (): ButtonComponent[] => [
-    $button.danger("Back ⇾", "help:back"),
+    $button.danger("⇽ Back", "help:back"),
+    $button.link("REPP Server", "https://discord.gg/C5HbPwzZx8")
 ]
 
 export const makeReppHomePageButtons = (): ButtonComponent[] => [

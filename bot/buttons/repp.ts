@@ -1,22 +1,34 @@
 import type { Component } from "../types";
-import { makeReppHomePage, makeReppNewsPage, makeReppHomePageButtons, makeReppBackButtons } from "../utils/info";
+import { type Embed } from "discordeno";
+import { makeReppHomePage, makeReppIntroPage ,makeReppNewsPage,makeReppCommandPage, makeReppHomePageButtons, makeReppBackButtons } from "../utils/info";
 export default {
     prefix: "help:",
     execute(interaction) {
         const id = interaction.data!.customId!.slice("help:".length) as "introduction" | "news" | "commandlist" | "back"
-        var embed
+        var embed: Embed
+        var buttons = makeReppBackButtons()
 
-
-        if (id == "news") {
-            embed = makeReppNewsPage()
-        } else if (id == "introduction") {
-
+        switch (id) {
+            case "introduction":
+                embed = makeReppIntroPage()
+                
+                break;
+            case "news":
+                embed = makeReppNewsPage()
+                break;
+            case "commandlist":
+                embed = makeReppCommandPage()
+                break;
+            case "back":
+                embed = makeReppHomePage()
+                buttons = makeReppHomePageButtons()
         }
+
 
         return interaction.edit({
             embeds: [embed as any],
             components: [{
-                type: 1, components: makeReppBackButtons() as any
+                type: 1, components: buttons as any
             }]
         })
     },
