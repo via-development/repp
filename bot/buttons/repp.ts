@@ -11,7 +11,6 @@ export default {
         switch (id) {
             case "introduction":
                 embed = makeReppIntroPage()
-                
                 break;
             case "news":
                 embed = makeReppNewsPage()
