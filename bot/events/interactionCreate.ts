@@ -1,21 +1,26 @@
 import { InteractionTypes, MessageComponentTypes } from "discordeno";
-import type { Command, Component, Interaction } from "../types";
+import type { Command, Component, Event, Interaction } from "../types";
 import fs from "fs"
 import path from "path";
 import { importFolder } from "../utils";
 
-export const interactionCreate = (interaction: Interaction): any => {
-    if (!interaction.data || !interaction.guildId) return
-    switch (interaction.type) {
-        case InteractionTypes.ApplicationCommand:
-            return handleCommand(interaction)
-        case InteractionTypes.MessageComponent:
-            switch (interaction.data!.componentType) {
-                case MessageComponentTypes.Button:
-                    return handleButton(interaction)
-            }
+export default {
+    name: "interactionCreate",
+    execute(interaction: Interaction): any {
+        if (!interaction.data || !interaction.guildId) return
+        switch (interaction.type) {
+            case InteractionTypes.ApplicationCommand:
+                return handleCommand(interaction)
+            case InteractionTypes.MessageComponent:
+                switch (interaction.data!.componentType) {
+                    case MessageComponentTypes.Button:
+                        return handleButton(interaction)
+                }
+        }
     }
-}
+} as Event
+
+
 
 const commands = new Map<string, Command>()
 
